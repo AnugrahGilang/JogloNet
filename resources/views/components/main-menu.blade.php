@@ -7,6 +7,12 @@ aria-label="Main navigation" data-accordion="false" id="navigation">
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('admin.produk.index') }}" class="nav-link">
+        <i class="nav-icon bi bi-palette"></i>
+        <p>Produk</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route(name: 'tagihan.index') }}" class="nav-link">
         <i class="nav-icon bi bi-palette"></i>
         <p>Tagihan</p>
@@ -28,7 +34,7 @@ aria-label="Main navigation" data-accordion="false" id="navigation">
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('laporan.pembayaran') }}" class="nav-link active">
+            <a href="{{ route('laporan.pembayaran') }}" class="nav-link ">
                 <i class="nav-icon bi bi-circle"></i>
                 <p>Pembayaran</p>
             </a>

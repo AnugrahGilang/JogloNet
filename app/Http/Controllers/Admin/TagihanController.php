@@ -12,7 +12,7 @@ class TagihanController extends Controller
     public function index()
     {
         // ambil tagihan (dengan eager load pelanggan)
-        $tagihan = Tagihan::with('pelanggan')->orderBy('tanggal_terbit', 'desc')->get();
+        $tagihan = Tagihan::with('pelanggan', 'produk')->orderBy('tanggal_terbit', 'desc')->get();
 
         // ambil daftar pelanggan untuk dropdown di modal
         $pelanggan = Pelanggan::orderBy('nama_pelanggan')->get();

@@ -1,0 +1,62 @@
+@extends('layouts.main')
+
+@section('content')
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2"> {{-- biar center --}}
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">Profil Saya</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('user.profile.update') }}" method="POST">
+                        @csrf
+
+                        <div class="form-group mb-3">
+                            <label>Nama Lengkap</label>
+                            <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $pelanggan->nama_lengkap ?? '') }}" class="form-control">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Paket</label>
+                            <input type="text" name="paket" value="{{ old('paket', $pelanggan->paket ?? '') }}" class="form-control">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Alamat</label>
+                            <textarea name="alamat" class="form-control">{{ old('alamat', $pelanggan->alamat ?? '') }}</textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Group</label>
+                            <input type="text" name="group" value="{{ old('group', $pelanggan->group ?? '') }}" class="form-control">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Email</label>
+                            <input type="email" name="email" value="{{ old('email', $pelanggan->email ?? $user->email) }}" class="form-control">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Nomor WhatsApp</label>
+                            <input type="text" name="no_hp" value="{{ old('no_hp', $pelanggan->no_hp ?? '') }}" class="form-control">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Tanggal Pemasangan</label>
+                            <input type="date" name="tanggal_pemasangan" value="{{ old('tanggal_pemasangan', $pelanggan->tanggal_pemasangan ?? '') }}" class="form-control">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Status</label>
+                            <input type="text" name="status" value="{{ old('status', $pelanggan->status ?? 'Aktif') }}" class="form-control" readonly>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

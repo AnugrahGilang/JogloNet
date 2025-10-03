@@ -16,6 +16,7 @@
         <a href="#home" class="hover:text-blue-600">Beranda</a>
         <a href="#katalog" class="hover:text-blue-600">Paket</a>
         <a href="#kontak" class="hover:text-blue-600">Kontak</a>
+        <a href="{{ route('user.login') }}" class="hover:text-blue-600">Login</a>
       </nav>
     </div>
   </header>

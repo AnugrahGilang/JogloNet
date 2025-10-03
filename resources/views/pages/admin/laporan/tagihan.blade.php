@@ -2,34 +2,34 @@
 
 @section('content')
 <div class="container-fluid">
-    <h3 class="mb-4">Laporan Tagihan</h3>
 
     {{-- Filter Form --}}
     <div class="card shadow mb-4">
         <div class="card-body">
+            <h3 class="mb-4">Laporan Tagihan</h3>
             <form method="GET" class="d-flex flex-wrap">
                 <select name="bulan" class="form-control mr-2 mb-2" style="max-width: 180px;">
                     <option value="">-- Pilih Bulan --</option>
-                    @for ($i = 1; $i <= 12; $i++)
-                        <option value="{{ $i }}" {{ request('bulan') == $i ? 'selected' : '' }}>
-                            {{ date("F", mktime(0, 0, 0, $i, 1)) }}
+                    @for ($i = 1; $i <= 12; $i++) <option value="{{ $i }}" {{ request('bulan')==$i ? 'selected' : '' }}>
+                        {{ date("F", mktime(0, 0, 0, $i, 1)) }}
                         </option>
-                    @endfor
+                        @endfor
                 </select>
 
                 <select name="tahun" class="form-control mr-2 mb-2" style="max-width: 150px;">
                     <option value="">-- Pilih Tahun --</option>
                     @for ($t = date('Y'); $t >= 2020; $t--)
-                        <option value="{{ $t }}" {{ request('tahun') == $t ? 'selected' : '' }}>
-                            {{ $t }}
-                        </option>
+                    <option value="{{ $t }}" {{ request('tahun')==$t ? 'selected' : '' }}>
+                        {{ $t }}
+                    </option>
                     @endfor
                 </select>
 
                 <select name="status" class="form-control mr-2 mb-2" style="max-width: 180px;">
                     <option value="">-- Semua Status --</option>
-                    <option value="lunas" {{ request('status')=='lunas'?'selected':'' }}>Lunas</option>
-                    <option value="belum lunas" {{ request('status')=='belum lunas'?'selected':'' }}>Belum Lunas</option>
+                    <option value="lunas" {{ request('status')=='lunas' ?'selected':'' }}>Lunas</option>
+                    <option value="belum lunas" {{ request('status')=='belum lunas' ?'selected':'' }}>Belum Lunas
+                    </option>
                 </select>
 
                 <button type="submit" class="btn btn-primary mb-2">Filter</button>

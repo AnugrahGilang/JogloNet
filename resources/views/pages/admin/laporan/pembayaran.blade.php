@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container-fluid">
-    <h3 class="mb-4">Laporan Pembayaran</h3>
 
     {{-- Filter Form --}}
     <div class="card shadow mb-4">
         <div class="card-body">
+            <h3 class="mb-4">Laporan Pembayaran</h3>
             <form method="GET" class="d-flex flex-wrap">
                 <select name="bulan" class="form-control mr-2 mb-2" style="max-width: 180px;">
                     <option value="">-- Pilih Bulan --</option>

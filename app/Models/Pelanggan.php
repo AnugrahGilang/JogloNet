@@ -12,6 +12,7 @@ class Pelanggan extends Model
     protected $table = 'pelanggan';
 
     protected $fillable = [
+        'user_id',
         'nama_pelanggan',
         'alamat',
         'no_hp',
@@ -26,5 +27,15 @@ class Pelanggan extends Model
     {
         return $this->hasMany(Tagihan::class, 'pelanggan_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function produkWifi()
+{
+    return $this->belongsTo(ProdukWifi::class, 'produk_id');
+}
 
 }

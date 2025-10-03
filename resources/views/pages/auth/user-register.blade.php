@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
 
-      <p class="text-center text-muted">Masuk sebagai User untuk memulai sesi Anda</p>
+      <p class="text-center text-muted">Buat akun User baru untuk mulai menggunakan layanan</p>
 
       @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
@@ -17,13 +17,21 @@
         <div class="alert alert-success">{{ session('success') }}</div>
       @endif
 
-      <form method="POST" action="{{ route('user.login') }}">
+      <form method="POST" action="{{ route('user.register.post') }}">
         @csrf
+
+        <div class="input-group mb-3">
+          <input type="text" name="name" value="{{ old('name') }}"
+                 class="form-control @error('name') is-invalid @enderror"
+                 placeholder="Nama Lengkap" required autofocus>
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          @error('name') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+        </div>
 
         <div class="input-group mb-3">
           <input type="email" name="email" value="{{ old('email') }}"
                  class="form-control @error('email') is-invalid @enderror"
-                 placeholder="Email" required autofocus>
+                 placeholder="Email" required>
           <span class="input-group-text"><i class="bi bi-envelope"></i></span>
           @error('email') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
         </div>
@@ -36,20 +44,19 @@
           @error('password') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
         </div>
 
+        <div class="input-group mb-3">
+          <input type="password" name="password_confirmation"
+                 class="form-control"
+                 placeholder="Konfirmasi Password" required>
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+        </div>
+
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <div class="form-check">
-            <input type="checkbox" name="remember" class="form-check-input" id="remember">
-            <label class="form-check-label" for="remember">Ingat Saya</label>
-          </div>
-          <button type="submit" class="btn btn-success">Masuk</button>
+          <a href="{{ route('user.login') }}" class="small">Sudah punya akun? Masuk</a>
+          <button type="submit" class="btn btn-success">Daftar</button>
         </div>
       </form>
-      <div class="text-center small">
-        <a href="#">Lupa password?</a><br>
-      </div>
-      <div class="text-center small mt-2">
-        Belum punya akun? <a href="{{ route('user.register') }}">Daftar disini</a>
-      </div>
+
     </div>
   </div>
 </body>

@@ -13,18 +13,28 @@ class Tagihan extends Model
 
     protected $fillable = [
         'pelanggan_id',
+        'produk_id',
         'periode',
-        'produk',
-        'jumlah_tagihan',
+        'jumlah',
         'status',
-        'tanggal_terbit',
+        'tanggal_tagihan',
         'tanggal_jatuh_tempo',
-        'tanggal_pemasangan',
-        'status'
     ];
+
+
 
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class, 'pelanggan_id');
     }
+
+    public function produk() {
+        return $this->belongsTo(ProdukWifi::class, 'produk_id');
+    }
+
+    public function produkWifi()
+{
+    return $this->belongsTo(ProdukWifi::class, 'produk_id');
+}
+
 }
