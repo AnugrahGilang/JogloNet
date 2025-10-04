@@ -28,7 +28,8 @@
         "DB_CONNECTION": "mysql",
         "DB_HOST": "4gg.h.filess.io",
         "DB_PORT": "3306",
-        "DB_DATABASE": "db2024_stormtorn",
-        "DB_USERNAME": "db2024_stormtorn"
+        "DB_DATABASE": "db_joglonet",
+        "DB_USERNAME": "db_joglonet",
+        "DB_PASSWORD": "anugrahgilang"
     }
 }
