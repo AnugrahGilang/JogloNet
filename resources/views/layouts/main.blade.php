@@ -22,7 +22,7 @@
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="{{ asset('/')}}lte/dist/css/adminlte.css" as="style" />
+    <link rel="preload" href="{{ asset('lte/dist/css/adminlte.css')}}" as="style" />
     <!--end::Accessibility Features-->
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -38,7 +38,7 @@
         crossorigin="anonymous" />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="{{ asset('/')}}lte/dist/css/adminlte.css" />
+    <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.css')}}" />
     <!--end::Required Plugin(AdminLTE)-->
     <!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"

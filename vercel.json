@@ -2,34 +2,45 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.7.4" }
+      "api/index.php": { "runtime": "vercel-php@0.7.4" }
     },
-    "routes": [
-        { "src": "/build/(.*)", "dest": "/public/build/" },
-        { "src": "/(.*)", "dest": "/api/index.php" }
+    "builds": [
+      {
+        "src": "public/index.php",
+        "use": "@vercel/php"
+      },
+      {
+        "src": "public/**/*",
+        "use": "@vercel/static"
+      }
     ],
-    "public": true,
+    "routes": [
+      { "src": "/lte/(.*)", "dest": "public/lte/$1" },
+      { "src": "/build/(.*)", "dest": "public/build/$1" },
+      { "src": "/(.*)", "dest": "api/index.php" }
+    ],
     "buildCommand": "vite build",
     "outputDirectory": "public",
+    "public": true,
     "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_URL": "https://joglonet.vercel.app/",
-        "APP_KEY": "base64:+JXrpurryDCLqDkwJub4VF1crRrRcG1XweWNJbKXxkc=",
-        "APP_CONFIG_CACHE": "/tmp/config.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php",
-        "APP_PACKAGES_CACHE": "/tmp/packages.php",
-        "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "mysql",
-        "DB_HOST": "cj3ylf.h.filess.io",
-        "DB_PORT": "61032",
-        "DB_DATABASE": "dbjoglonet_acrossbee",
-        "DB_USERNAME": "dbjoglonet_acrossbee",
-        "DB_PASSWORD": "8840c463ac8aa1d935f97d439c0dd5c624fc3eff"
+      "APP_ENV": "production",
+      "APP_DEBUG": "true",
+      "APP_URL": "https://joglonet.vercel.app/",
+      "APP_KEY": "base64:+JXrpurryDCLqDkwJub4VF1crRrRcG1XweWNJbKXxkc=",
+      "APP_CONFIG_CACHE": "/tmp/config.php",
+      "APP_EVENTS_CACHE": "/tmp/events.php",
+      "APP_PACKAGES_CACHE": "/tmp/packages.php",
+      "APP_ROUTES_CACHE": "/tmp/routes.php",
+      "APP_SERVICES_CACHE": "/tmp/services.php",
+      "VIEW_COMPILED_PATH": "/tmp",
+      "CACHE_DRIVER": "array",
+      "LOG_CHANNEL": "stderr",
+      "SESSION_DRIVER": "cookie",
+      "DB_CONNECTION": "mysql",
+      "DB_HOST": "cj3ylf.h.filess.io",
+      "DB_PORT": "61032",
+      "DB_DATABASE": "dbjoglonet_acrossbee",
+      "DB_USERNAME": "dbjoglonet_acrossbee",
+      "DB_PASSWORD": "8840c463ac8aa1d935f97d439c0dd5c624fc3eff"
     }
-}
+  }

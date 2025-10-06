@@ -2,7 +2,7 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="{{ asset('/')}}lte/dist/index.html" class="brand-link">
+        <a href="{{ asset('lte/dist/index.html')}}" class="brand-link">
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">Joglo.net</span>
             <!--end::Brand Text-->
