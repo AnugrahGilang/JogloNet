@@ -2,7 +2,7 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.0" }
+        "api/index.php": { "runtime": "vercel-php@0.7.4" }
     },
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/" },
@@ -13,9 +13,9 @@
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
-        "APP_URL": "https://yourproductionurl.com",
-        "APP_KEY": "base64:TGaVaXwhWgjn9akhE4SCSIjGG/cQqvICUQ+PgLA3Bs0=",
+        "APP_DEBUG": "true",
+        "APP_URL": "",
+        "APP_KEY": "W7sBRqErsDPj1A76NQTYjYHWl7sBbvvfPESrQ0bWFkg=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -26,10 +26,10 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "DB_CONNECTION": "mysql",
-        "DB_HOST": "4gg.h.filess.io",
-        "DB_PORT": "3306",
-        "DB_DATABASE": "db_joglonet",
-        "DB_USERNAME": "db_joglonet",
-        "DB_PASSWORD": "anugrahgilang"
+        "DB_HOST": "cj3ylf.h.filess.io",
+        "DB_PORT": "61032",
+        "DB_DATABASE": "dbjoglonet_acrossbee",
+        "DB_USERNAME": "dbjoglonet_acrossbee",
+        "DB_PASSWORD": "8840c463ac8aa1d935f97d439c0dd5c624fc3eff"
     }
 }
