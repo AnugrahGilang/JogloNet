@@ -17,7 +17,7 @@
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <!-- Chart Donut -->
                     <div style="flex:1; max-width:60%;">
-                        <canvas id="donutChart"></canvas>
+                        <canvas id="statusChart"></canvas>
                     </div>
 
                     <!-- Tabel Ringkasan -->
@@ -36,7 +36,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- Tabel Pelanggan Terbaru -->
         <div class="col-md-4">
@@ -98,42 +97,52 @@
 @endsection
 
 @section('scripts')
-<!-- Chart.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // Donut Chart
-    const donut = document.getElementById('donutChart');
-    if (donut) {
-        new Chart(donut, {
-            type: 'doughnut',
-            data: {
-                labels: ['Lunas', 'Belum Lunas'],
-                datasets: [{
-                    data: [{{ $lunas }}, {{ $belumLunas }}],
-                    backgroundColor: ['#28a745', '#dc3545']
-                }]
+    // Chart Lunas vs Belum Lunas
+    const ctx = document.getElementById('statusChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @json($bulanArr),
+            datasets: [
+                {
+                    label: 'Lunas',
+                    data: @json($lunasBulanan),
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                },
+                {
+                    label: 'Belum Lunas',
+                    data: @json($belumLunasBulanan),
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Statistik Tagihan per Bulan'
+                }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'bottom' } }
-            }
-        });
-    }
+            scales: { y: { beginAtZero: true } }
+        }
+    });
 
-    // Transaksi Bulanan
+    // Chart Transaksi Bulanan
     const trx = document.getElementById('transaksiChart');
     if (trx) {
         new Chart(trx, {
             type: 'bar',
             data: {
-                labels: {!! json_encode($bulan) !!},
+                labels: @json($bulan),
                 datasets: [{
-                    label: 'Total',
-                    data: {!! json_encode($transaksi) !!},
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    label: 'Total Transaksi',
+                    data: @json($transaksi),
+                    backgroundColor: 'rgba(255, 159, 64, 0.5)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
                     borderWidth: 1
                 }]
             },
@@ -141,16 +150,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Belum Lunas Bulanan
+    // Chart Belum Lunas Bulanan
     const bl = document.getElementById('belumLunasChart');
     if (bl) {
         new Chart(bl, {
             type: 'bar',
             data: {
-                labels: {!! json_encode($bulanBelumLunas) !!},
+                labels: @json($bulanBelumLunas),
                 datasets: [{
-                    label: 'Total',
-                    data: {!! json_encode($jumlahBelumLunas) !!},
+                    label: 'Total Belum Lunas',
+                    data: @json($jumlahBelumLunas),
                     backgroundColor: 'rgba(54, 162, 235, 0.5)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1

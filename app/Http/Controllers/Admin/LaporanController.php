@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tagihan;
+use App\Models\ProdukWifi;
 
 class LaporanController extends Controller
 {
         // Laporan Tagihan
         public function tagihan(Request $request)
         {
+            $produk = ProdukWifi::orderBy('kecepatan')->get();
             $query = Tagihan::with('pelanggan');
 
             // Filter bulan
@@ -30,12 +32,13 @@ class LaporanController extends Controller
 
             $tagihan = $query->get();
 
-            return view('pages.admin.laporan.tagihan', compact('tagihan'));
+            return view('pages.admin.laporan.tagihan', compact('tagihan', 'produk'));
         }
 
         // Laporan Pembayaran
         public function pembayaran(Request $request)
         {
+            $produk = ProdukWifi::orderBy('kecepatan')->get();
             $query = Tagihan::with('pelanggan')->where('status', 'lunas');
 
             // Filter bulan & tahun dari updated_at
@@ -48,6 +51,6 @@ class LaporanController extends Controller
 
             $pembayaran = $query->get();
 
-            return view('pages.admin.laporan.pembayaran', compact('pembayaran'));
+            return view('pages.admin.laporan.pembayaran', compact('pembayaran', 'produk'));
         }
 }

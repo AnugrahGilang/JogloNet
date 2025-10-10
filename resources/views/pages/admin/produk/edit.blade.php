@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Produk WiFi')
+@section('title', 'Edit Produk WiFi')
 
 @section('content')
 <div class="container-fluid">
@@ -27,38 +27,39 @@
     </div>
     @endif
 
-    <div class="card card-primary">
+    <div class="card card-warning">
         <div class="card-header">
-            <h3 class="card-title">Tambah Produk WiFi</h3>
+            <h3 class="card-title">Edit Produk WiFi</h3>
         </div>
 
-        <form action="{{ route('admin.produk.store') }}" method="POST">
+        <form action="{{ route('admin.produk.update', $produk->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group">
                     <label>Nama Paket</label>
-                    <input type="text" name="nama_paket" value="{{ old('nama_paket') }}" class="form-control" required>
+                    <input type="text" name="nama_paket" value="{{ old('nama_paket', $produk->nama_paket) }}" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label>Kecepatan (Mbps)</label>
-                    <input type="number" name="kecepatan" value="{{ old('kecepatan') }}" class="form-control" required>
+                    <input type="number" name="kecepatan" value="{{ old('kecepatan', $produk->kecepatan) }}" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label>Harga</label>
-                    <input type="number" name="harga" value="{{ old('harga') }}" class="form-control" required>
+                    <input type="number" name="harga" value="{{ old('harga', $produk->harga) }}" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label>Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" rows="3">{{ old('deskripsi') }}</textarea>
+                    <textarea name="deskripsi" class="form-control" rows="3">{{ old('deskripsi', $produk->deskripsi) }}</textarea>
                 </div>
             </div>
 
             <div class="card-footer">
                 <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-warning">Perbarui</button>
             </div>
         </form>
     </div>

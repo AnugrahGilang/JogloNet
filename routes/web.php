@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -11,6 +12,8 @@ use App\Http\Controllers\Admin\ProdukWifiController;
 Use App\Http\Controllers\User\ProdukController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 
+
+Route::get('/', [HomepageController::class, 'index'])->name('welcome');
 
 // 🔹 Route untuk User Login
 Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('user.login');
@@ -84,10 +87,4 @@ Route::put('/admin/produk/{id}', [ProdukWifiController::class, 'update'])->name(
             return view('admin.super-dashboard'); // dashboard khusus superadmin
         })->name('admin.super.dashboard');
     });
-});
-
-
-
-Route::get('/', function () {
-    return view('welcome');
 });

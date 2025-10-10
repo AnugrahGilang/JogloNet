@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@php
+    use Carbon\Carbon;
+@endphp
 
 @section('content')
 <div class="container-fluid">
@@ -59,9 +62,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $t->pelanggan->nama_pelanggan ?? '-' }}</td>
                             <td>{{ $t->periode ?? '-' }}</td>
-                            <td>Rp {{ number_format($t->jumlah_tagihan, 0, ',', '.') }}</td>
-                            <td>{{ $t->tanggal_terbit }}</td>
-                            <td>{{ $t->tanggal_jatuh_tempo }}</td>
+                            <td>Rp {{ number_format($t->produk->harga, 0, ',', '.') }}</td>
+                            <td>{{ Carbon::parse($t->tanggal_terbit)->translatedFormat('d F Y') }}</td>
+                            <td>{{ Carbon::parse($t->tanggal_jatuh_tempo)->translatedFormat('d F Y') }}</td>
                             <td>{{ ucfirst($t->status) }}</td>
                         </tr>
                         @endforeach

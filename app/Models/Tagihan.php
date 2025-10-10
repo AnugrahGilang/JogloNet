@@ -17,7 +17,7 @@ class Tagihan extends Model
         'periode',
         'jumlah',
         'status',
-        'tanggal_tagihan',
+        'tanggal_terbit',
         'tanggal_jatuh_tempo',
     ];
 
@@ -31,10 +31,5 @@ class Tagihan extends Model
     public function produk() {
         return $this->belongsTo(ProdukWifi::class, 'produk_id');
     }
-
-    public function produkWifi()
-{
-    return $this->belongsTo(ProdukWifi::class, 'produk_id');
-}
 
 }

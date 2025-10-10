@@ -69,10 +69,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $tagihan->produk }} - {{ $tagihan->periode }}</td>
-                    <td>{{ $tagihan->produk }}</td>
+                    <td>{{ $tagihan->produk->nama_paket }} - {{ $tagihan->periode }}</td>
+                    <td>
+                        Kecepatan: {{ $tagihan->produk->kecepatan }} Mbps <br>
+                        Harga: Rp {{ number_format($tagihan->produk->harga, 0, ',', '.') }} <br>
+                    </td>
                     <td>1</td>
-                    <td>{{ number_format($tagihan->jumlah_tagihan, 0, ',', '.') }}</td>
+                    <td>Rp {{ number_format($tagihan->produk->harga, 0, ',', '.') }}</td>
                 </tr>
             </tbody>
         </table>
@@ -96,12 +99,8 @@
             <!-- Ringkasan -->
             <div class="col-6">
                 <table class="table table-bordered">
-                    <tr><td>Subtotal</td><td class="text-end">{{ number_format($tagihan->jumlah_tagihan, 0, ',', '.') }}</td></tr>
-                    <tr><td>Discount</td><td class="text-end">0</td></tr>
-                    <tr><td>Pajak</td><td class="text-end">0</td></tr>
-                    <tr><td>Biaya Admin</td><td class="text-end">0</td></tr>
-                    <tr><td>Kode Unik</td><td class="text-end">0</td></tr>
-                    <tr><th>Total</th><th class="text-end">{{ number_format($tagihan->jumlah_tagihan, 0, ',', '.') }}</th></tr>
+                    <tr><td>Subtotal</td><td class="text-end"><td>Rp {{ number_format($tagihan->produk->harga, 0, ',', '.') }}</td></td></tr>
+                    <tr><th>Total</th><th class="text-end"><td>Rp {{ number_format($tagihan->produk->harga, 0, ',', '.') }}</td></th></tr>
                 </table>
             </div>
         </div>

@@ -1,3 +1,5 @@
+@php use Illuminate\Support\Str; @endphp
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -30,54 +32,33 @@
     </div>
   </section>
 
-  <!-- Katalog Produk -->
-  <section id="katalog" class="py-16">
+<!-- Katalog Produk -->
+<section id="katalog" class="py-16">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-3xl font-bold text-center mb-12">Paket Internet Kami</h3>
       <div class="grid md:grid-cols-3 gap-8">
-
-        <!-- Paket 1 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
-          <h4 class="text-xl font-bold mb-2">Paket Hemat</h4>
-          <p class="text-gray-500 mb-4">Cocok untuk penggunaan ringan di rumah</p>
-          <p class="text-3xl font-bold text-blue-600 mb-4">Rp 100.000<span class="text-base font-normal">/bulan</span></p>
-          <ul class="text-sm text-gray-600 mb-6 space-y-2">
-            <li>Kecepatan hingga 10 Mbps</li>
-            <li>Tanpa batas kuota</li>
-            <li>Gratis instalasi</li>
-          </ul>
-          <a href="#kontak" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Pesan Sekarang</a>
-        </div>
-
-        <!-- Paket 2 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
-          <h4 class="text-xl font-bold mb-2">Paket Standar</h4>
-          <p class="text-gray-500 mb-4">Pilihan populer untuk keluarga</p>
-          <p class="text-3xl font-bold text-blue-600 mb-4">Rp 200.000<span class="text-base font-normal">/bulan</span></p>
-          <ul class="text-sm text-gray-600 mb-6 space-y-2">
-            <li>Kecepatan hingga 30 Mbps</li>
-            <li>Tanpa batas kuota</li>
-            <li>Dukungan teknis 24/7</li>
-          </ul>
-          <a href="#kontak" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Pesan Sekarang</a>
-        </div>
-
-        <!-- Paket 3 -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
-          <h4 class="text-xl font-bold mb-2">Paket Premium</h4>
-          <p class="text-gray-500 mb-4">Untuk usaha & kebutuhan berat</p>
-          <p class="text-3xl font-bold text-blue-600 mb-4">Rp 350.000<span class="text-base font-normal">/bulan</span></p>
-          <ul class="text-sm text-gray-600 mb-6 space-y-2">
-            <li>Kecepatan hingga 50 Mbps</li>
-            <li>Tanpa batas kuota</li>
-            <li>Prioritas layanan</li>
-          </ul>
-          <a href="#kontak" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Pesan Sekarang</a>
-        </div>
-
+        @forelse ($produkList as $produk)
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
+            <h4 class="text-xl font-bold mb-2">{{ $produk->nama_paket }}</h4>
+            <p class="text-gray-500 mb-4">{{ Str::limit($produk->deskripsi, 80) }}</p>
+            <p class="text-3xl font-bold text-blue-600 mb-4">
+              Rp {{ number_format($produk->harga, 0, ',', '.') }}
+              <span class="text-base font-normal">/bulan</span>
+            </p>
+            <ul class="text-sm text-gray-600 mb-6 space-y-2">
+              <li>Kecepatan hingga {{ $produk->kecepatan }} Mbps</li>
+              <li>Tanpa batas kuota</li>
+              <li>Dukungan teknis 24/7</li>
+            </ul>
+            <a href="#kontak" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Pesan Sekarang</a>
+          </div>
+        @empty
+          <p class="text-center col-span-3 text-gray-500">Belum ada produk tersedia.</p>
+        @endforelse
       </div>
     </div>
   </section>
+
 
   <!-- Kontak -->
   <section id="kontak" class="bg-gray-100 py-16">

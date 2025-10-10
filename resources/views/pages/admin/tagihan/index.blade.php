@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@php
+    use Carbon\Carbon;
+@endphp
 
 @section('title', 'Data Tagihan')
 
@@ -41,11 +44,11 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $t->pelanggan->nama_pelanggan }}</td>
                         <td>{{ $t->periode }}</td>
-                        <td>{{ $t->produk }}</td>
-                        <td>Rp {{ number_format($t->jumlah_tagihan,0,',','.') }}</td>
+                        <td>{{ $t->produk->kecepatan ?? '-' }}</td>
+                        <td>Rp {{ number_format($t->produk->harga, 0, ',', '.') }}</td>
                         <td>{{ $t->status }}</td>
-                        <td>{{ $t->tanggal_terbit }}</td>
-                        <td>{{ $t->tanggal_jatuh_tempo }}</td>
+                        <td>{{ Carbon::parse($t->tanggal_terbit)->translatedFormat('d F Y') }}</td>
+                        <td>{{ Carbon::parse($t->tanggal_jatuh_tempo)->translatedFormat('d F Y') }}</td>
                         <td>
                             @php
                             $tanggalTempo = \Carbon\Carbon::parse($t->tanggal_jatuh_tempo)->translatedFormat('d F Y');
@@ -152,12 +155,17 @@
 
                     <div class="form-group">
                         <label>Produk</label>
-                        <input type="text" name="produk" class="form-control" required>
+                        <select name="produk_id" id="produk_id_create" class="form-control" required>
+                            <option value="">-- Pilih Produk Wifi --</option>
+                            @foreach($produk as $p)
+                                <option value="{{ $p->id }}" data-harga="{{ $p->harga }}">{{ $p->kecepatan }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Harga</label>
-                        <input type="number" name="jumlah_tagihan" class="form-control" required>
+                        <input type="number" name="jumlah" id="jumlah" class="form-control" readonly required>
                     </div>
 
                     <div class="form-group">
@@ -190,6 +198,8 @@
     </div>
 </div>
 
+<!-- Modal Edit Tagihan-->
+<!-- Modal Edit Tagihan -->
 @foreach($tagihan as $t)
 <div class="modal fade" id="modalEditTagihan{{ $t->id }}" tabindex="-1"
     aria-labelledby="modalEditTagihanLabel{{ $t->id }}" aria-hidden="true">
@@ -222,19 +232,27 @@
 
                     <div class="form-group">
                         <label>Produk</label>
-                        <input type="text" name="produk" class="form-control" value="{{ $t->produk }}" required>
+                        <select name="produk_id" id="produk_id_edit{{ $t->id }}" class="form-control produk-edit" required>
+                            <option value="">-- Pilih Produk Wifi --</option>
+                            @foreach($produk as $p)
+                                <option value="{{ $p->id }}" data-harga="{{ $p->harga }}"
+                                    {{ $t->produk_id == $p->id ? 'selected' : '' }}>
+                                    {{ $p->kecepatan }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Harga</label>
-                        <input type="number" name="jumlah_tagihan" class="form-control" value="{{ $t->jumlah_tagihan }}"
-                            required>
+                        <input type="number" name="jumlah_tagihan" id="jumlah_tagihan_edit{{ $t->id }}"
+                            class="form-control jumlah-edit"
+                            value="{{ $t->produk->harga ?? $t->jumlah_tagihan }}" readonly required>
                     </div>
 
                     <div class="form-group">
                         <label>Tanggal</label>
-                        <input type="date" name="tanggal_terbit" class="form-control" value="{{ $t->tanggal_terbit }}"
-                            required>
+                        <input type="date" name="tanggal_terbit" class="form-control" value="{{ $t->tanggal_terbit }}" required>
                     </div>
 
                     <div class="form-group">
@@ -246,11 +264,9 @@
                     <div class="form-group">
                         <label>Status</label>
                         <select name="status" class="form-control">
-                            <option value="Belum Lunas" {{ $t->status == 'Belum Lunas' ? 'selected' : '' }}>Belum Lunas
-                            </option>
+                            <option value="Belum Lunas" {{ $t->status == 'Belum Lunas' ? 'selected' : '' }}>Belum Lunas</option>
                             <option value="Lunas" {{ $t->status == 'Lunas' ? 'selected' : '' }}>Lunas</option>
-                            <option value="Jatuh Tempo" {{ $t->status == 'Jatuh Tempo' ? 'selected' : '' }}>Jatuh Tempo
-                            </option>
+                            <option value="Jatuh Tempo" {{ $t->status == 'Jatuh Tempo' ? 'selected' : '' }}>Jatuh Tempo</option>
                         </select>
                     </div>
 
@@ -265,5 +281,21 @@
 </div>
 @endforeach
 
+<script>
+    document.getElementById('produk_id_create').addEventListener('change', function() {
+        const harga = this.options[this.selectedIndex].getAttribute('data-harga');
+        document.getElementById('jumlah_tagihan_create').value = harga || '';
+    });
+    </script>
 
+<script>
+    document.querySelectorAll('.produk-edit').forEach(select => {
+        select.addEventListener('change', function() {
+            const harga = this.options[this.selectedIndex].getAttribute('data-harga');
+            const id = this.id.replace('produk_id_edit', '');
+            const inputHarga = document.getElementById('jumlah_tagihan_edit' + id);
+            if (inputHarga) inputHarga.value = harga || '';
+        });
+    });
+    </script>
 @endsection
